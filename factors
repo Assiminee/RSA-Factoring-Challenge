@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import math
-import sys
+from sys import argv
 
 
 def fact3(num):
@@ -31,15 +31,23 @@ def fact3(num):
 
 
 def RSA():
-    f = open(sys.argv[1], "r")
-    line = f.readline()
-    while line:
-        if line == "\n":
-            break
-        x = int(line)
-        factors = fact3(x)
-        print(f"{x}={factors[0]}*{factors[1]}")
-        line = f.readline()
+
+    if len(argv) > 1:
+        input_file = argv[1]
+        try:
+            with open(input_file, "r") as f:
+                line = f.readline()
+                while line:
+                    if line == "\n":
+                        break
+                    x = int(line)
+                    factors = fact3(x)
+                    print(f"{x}={factors[0]}*{factors[1]}")
+                    line = f.readline()
+        except FileNotFoundError:
+            print(f"Error: Can't open file {argv[1]}")
+    else:
+        print("Usage: factors <file>")
 
 
 RSA()
