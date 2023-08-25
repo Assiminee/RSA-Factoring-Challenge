@@ -1,33 +1,20 @@
 #!/usr/bin/python3
-import math
+from math import sqrt
 from sys import argv
 
 
 def fact3(num):
 
-    sign = -1 if num < 0 else 1
-    num *= sign
-    sqrt_num = int(math.sqrt(num))
-    factors = []
+    sqrt_num = int(sqrt(abs(num)))
 
     if num % 2 == 0:
-        factors.extend([num//2, 2])
-        if sign < 0:
-            factors[0] *= sign
-        return factors
+        return [num//2, 2]
 
     for i in range(3, sqrt_num + 1, 2):
         if i == sqrt_num and not num % sqrt_num == 0:
-            factors.extend([num, 1])
-            break
+            return [num, 1]
         if num % i == 0:
-            factors.append(num//i)
-            factors.append(i)
-            break
-
-    if sign < 0:
-        factors[0] *= sign
-    return factors
+            return [num//i, i]
 
 
 def RSA():
