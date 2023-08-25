@@ -16,7 +16,7 @@ def fact3(num):
             factors[0] *= sign
         return factors
 
-    for i in range(3, num+1, 2):
+    for i in range(3, sqrt_num + 1, 2):
         if i == sqrt_num and not num % sqrt_num == 0:
             factors.extend([num, 1])
             break
@@ -24,7 +24,6 @@ def fact3(num):
             factors.append(num//i)
             factors.append(i)
             break
-        i += 1
 
     if sign < 0:
         factors[0] *= sign
