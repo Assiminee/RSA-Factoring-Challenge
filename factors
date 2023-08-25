@@ -1,0 +1,46 @@
+#!/usr/bin/python3
+import math
+import sys
+
+
+def fact3(num):
+
+    sign = -1 if num < 0 else 1
+    num *= sign
+    sqrt_num = int(math.sqrt(num))
+    factors = []
+
+    if num % 2 == 0:
+        factors.extend([num//2, 2])
+        if sign < 0:
+            factors[0] *= sign
+        return factors
+
+    for i in range(3, num+1, 2):
+        if i == sqrt_num and not num % sqrt_num == 0:
+            factors.extend([num, 1])
+            break
+        if num % i == 0:
+            factors.append(num//i)
+            factors.append(i)
+            break
+        i += 1
+
+    if sign < 0:
+        factors[0] *= sign
+    return factors
+
+
+def RSA():
+    f = open(sys.argv[1], "r")
+    line = f.readline()
+    while line:
+        if line == "\n":
+            break
+        x = int(line)
+        factors = fact3(x)
+        print(f"{x}={factors[0]}*{factors[1]}")
+        line = f.readline()
+
+
+RSA()
