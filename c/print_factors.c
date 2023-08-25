@@ -33,17 +33,16 @@ void print_factors(int number)
  */
 void read_from_file(FILE *fd)
 {
-	size_t buff = 0;
-	ssize_t characters;
-	char *line = NULL;
+	char *line = malloc(1024);
 
-	while ((characters = getline(&line, &buff, fd)) != EOF)
+	while (fgets(line, 1024, fd))
 	{
 		if (line[0] == '\n')
 		{
 			free(line);
 			break;
 		}
-		print_factors(atoi(line));
+		printf("%lld\n", strtoll(line, NULL, 10));
+		/* print_factors(atoi(line)); */
 	}
 }
