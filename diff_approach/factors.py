@@ -1,27 +1,18 @@
 #!/usr/bin/python3
 from math import sqrt
 from sys import argv
+from time import time
 
+start = time()
 
-def fact1(num):
+def fact3(num):
 
     sqrt_num = int(sqrt(abs(num)))
 
-    for i in range(2, 10000):
-        if num % i == 0:
-            print(f"{num}={num//i}*{i}")
-            return 1
-    return 0
-
-
-def fact2(num):
-
-    i = int(sqrt(abs(num)))
-    while i >= 10000:
+    for i in range(2, sqrt_num + 1):
         if num % i == 0:
             print(f"{num}={num//i}*{i}")
             return
-        i -= 1
     print(f"{num}={num}*{1}")
 
 
@@ -36,8 +27,7 @@ def RSA():
                 while line:
                     if line == "\n":
                         break
-                    if fact1(int(line)) == 0:
-                        fact2(int(line))
+                    fact3(int(line))
                     line = f.readline()
         except FileNotFoundError:
             print(f"Error: Can't open file {argv[1]}")
@@ -46,3 +36,6 @@ def RSA():
 
 
 RSA()
+
+end = time()
+print(f"Elapsed time: {end-start:.6f} seconds\n")
