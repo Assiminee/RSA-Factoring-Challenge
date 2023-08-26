@@ -5,14 +5,29 @@ from time import time
 
 start = time()
 
+# is_prime - checks if "num" is prime
+def is_prime(num):
+    num = abs(num)
+    if num in range(2):
+        return False
+    i = 2
+    while i <= int(sqrt(num)):
+        if num % i == 0:
+            return False
+        i += 1
+    return True
+
+
+# fact3 - finds two prime factors of a number
 def fact3(num):
 
     sqrt_num = int(sqrt(abs(num)))
 
     for i in range(2, sqrt_num + 1):
         if num % i == 0:
-            print(f"{num}={num//i}*{i}")
-            return
+            if is_prime(num//i) and is_prime(i):
+                print(f"{num}={num//i}*{i}")
+                return
     print(f"{num}={num}*{1}")
 
 
@@ -22,13 +37,8 @@ def RSA():
         input_file = argv[1]
         try:
             with open(input_file, "r") as f:
-                factors = []
                 line = f.readline()
-                while line:
-                    if line == "\n":
-                        break
-                    fact3(int(line))
-                    line = f.readline()
+                fact3(int(line))
         except FileNotFoundError:
             print(f"Error: Can't open file {argv[1]}")
     else:
