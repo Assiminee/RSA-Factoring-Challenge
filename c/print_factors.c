@@ -6,20 +6,20 @@
  *
  * Return: void
  */
-void print_factors(int number)
+void print_factors(float number)
 {
-	int sqrt_num = (int)floor(sqrt(abs(number))), i;
+	float sqrt_num = floor(sqrtf(fabs(number))), i;
 
-	for (i = 2; i <= sqrt_num; i++)
+	for (i = 2.0; i <= sqrt_num; i += 1.0)
 	{
-		if (i == sqrt_num && abs(number) % sqrt_num != 0)
+		if (i == sqrt_num && fmod(fabs(number), sqrt_num))
 		{
-			printf("%d=%d*%d\n", number, number, 1);
+			printf("%.f=%.f*%d\n", number, number, 1);
 			return;
 		}
-		if (abs(number) % i == 0)
+		if (!fmod(fabs(number), i))
 		{
-			printf("%d=%d*%d\n", number, number / i, i);
+			printf("%.f=%.f*%.f\n", number, number / i, i);
 			return;
 		}
 	}
@@ -33,16 +33,16 @@ void print_factors(int number)
  */
 void read_from_file(FILE *fd)
 {
-	char *line = malloc(1024);
+	char *line = malloc(2048);
 
-	while (fgets(line, 1024, fd))
+	while (fgets(line, 2048, fd))
 	{
 		if (line[0] == '\n')
 		{
 			free(line);
 			break;
 		}
-		printf("%lld\n", strtoll(line, NULL, 10));
-		/* print_factors(atoi(line)); */
+		/* print_factors(atof(line)); */
+		printf("%s\n%.f\n\n", line, strtod(line, NULL));
 	}
 }

@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-void print_factors(int number);
+void print_factors(float number);
 void read_from_file(FILE *fd);
 
 #endif
