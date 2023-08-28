@@ -3,7 +3,7 @@ from math import sqrt
 from sys import argv
 
 
-def fact3(num):
+def factorize(num):
 
     sqrt_num = int(sqrt(abs(num)))
 
@@ -20,12 +20,11 @@ def RSA():
         input_file = argv[1]
         try:
             with open(input_file, "r") as f:
-                factors = []
                 line = f.readline()
                 while line:
                     if line == "\n":
                         break
-                    fact3(int(line))
+                    factorize(int(line))
                     line = f.readline()
         except FileNotFoundError:
             print(f"Error: Can't open file {argv[1]}")
